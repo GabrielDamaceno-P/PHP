@@ -1,19 +1,134 @@
 <!DOCTYPE html>
-<br>
- <head><title>Sistema de Login</title></head>
-<br>
-    
-    <p><h1 align="center" style="color: red; font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;">Seja Bem Vindo!!!</h1></p>
-    <input type="text" placeholder="Nome">
-    
-</br>
-</br>
-    <input type="password" placeholder="Senha" required>
-</br>
-</br>
-    <button type="submit">enviar</button>
-    <p>Não tem conta? Registre-se</p>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>minha primeira pagina HTML</title>
 
+    <style>
+      html, body {
+       margin: 0;
+       padding: 0;
+       overflow: hidden;
+       background-color: #ccc;
+      }
+
+      #container-imagens {
+        position: fixed;
+        display: grid;
+        width: 100vw;
+        height: 100vh;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        grid-template-rows: repeat(auto-fit, minmax(80px, 1fr));
+      }
+      #card {
+        position: fixed;
+        border-radius: 10px;
+        background-color: white;
+        padding: 20px;
+        width: 300px;
+        box-shadow:10px 10px 3px black ;
+        border: 2px solid black;
+        text-align: center;
+      }
+      #dog{
+        position: fixed;
+        z-index: 3;
+        
+      }
+
+    
+
+    </style></head>
+<body>
+
+   <div id="container-imagens"></div>
+
+   <img  id="dog" src="/imagens/dog.png" alt="dog" width="300px" height="300px" >
+
+   <div id="card">
+     Nome: <input type="text" placeholder="nome">
+     <br>
+     <br>
+     Senha: <input type="password" placeholder="senha">
+     <br>
+     <br>
+     <button>enviar</button>
+   </div>
 
 </body>
+
+   <script>
+    const larguraTela = window.innerWidth
+    const  alturaTela = window.innerHeight
+
+    const larguraImagem = 80
+    const alturaImagem = 80
+
+    function imagens(){
+
+        const colunas = Math.ceil(larguraTela/larguraImagem)
+        const linhas = Math.ceil(alturaTela/alturaImagem)
+    
+    
+        const totalImagens = colunas * linhas
+    
+        const container = document.getElementById("container-imagens")
+    
+        for(let i = 0; i < totalImagens; i++){
+            const imagem = document.createElement("img")
+    
+            imagem.src = "/imagens/osso (2).png"
+            imagem.width = larguraImagem
+            imagem.height = alturaImagem
+    
+            container.appendChild(imagem)
+        }
+    }
+
+    function centralizar(){
+
+        const larguraTela = window.innerWidth
+        const alturaTela = window.innerHeight
+
+        const card = document.getElementById("card")
+
+        const LarguraCard = card.offsetWidth
+        const AlturaCard = card.offsetHeight
+
+        const leftCard = (larguraTela - LarguraCard)/2
+        const topCard = (alturaTela - AlturaCard)/2
+
+        card.style.left = leftCard + "px"
+        card.style.top = topCard + "px"
+
+        const dog = document.getElementById("dog")
+
+        const AlturaDog = dog.offsetHeight
+        const LarguraDog = dog.offsetWidth
+
+        const LeftDog = (larguraTela - LarguraDog)/2
+        const TopDog = topCard - AlturaDog
+
+        dog.style.left = LeftDog + "px"
+        dog.style.top = TopDog + "px"
+        
+       
+    }
+
+    imagens()
+    centralizar()
+
+   
+
+    window.addEventListener('resize', ()=>{
+        imagens();
+        centralizar()
+    })
+
+
+
+
+    
+    </script>
 </html>
