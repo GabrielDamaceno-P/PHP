@@ -30,11 +30,35 @@
         box-shadow:10px 10px 3px black ;
         border: 2px solid black;
         text-align: center;
+        animation-name: card;
+        animation-duration: 2s;
       }
+      @keyframes card{
+        from {opacity: 0;}
+        to {opacity: 2;}
+      }   
+
       #dog{
         position: fixed;
         z-index: 3;
-        
+        height: 200px;
+        animation-name: dog;
+        animation-duration: 2s;
+      }
+      @keyframes dog{
+        from {transform: translateY(-400PX)}
+      }
+      input:focus{
+        background-color: bisque;
+        width: 200px;
+        border: 2px solid black;
+        box-shadow: 0 0 5px black;
+      }
+      button:hover{
+        box-shadow: 10 10 15px black;
+        background-color: azure;
+        transform: scale(1.02);
+
       }
 
     
@@ -47,14 +71,18 @@
    <img  id="dog" src="/imagens/dog.png" alt="dog" width="300px" height="300px" >
 
    <div id="card">
-     Nome: <input type="text" placeholder="nome">
+     Nome: <input id="nome" type="text" placeholder="nome">
      <br>
      <br>
-     Senha: <input type="password" placeholder="senha">
+     Senha: <input id="senha" type="password" placeholder="senha">
      <br>
      <br>
-     <button>enviar</button>
+     <button id="button">enviar</button>
+     <br>
+     Não tem conta? Entre e se <a href="#" >cadastre</a>
    </div>
+
+   
 
 </body>
 
@@ -87,7 +115,7 @@
     }
 
     function centralizar(){
-
+        //Centralizar o Card e a Imagem do Dog
         const larguraTela = window.innerWidth
         const alturaTela = window.innerHeight
 
@@ -112,18 +140,31 @@
 
         dog.style.left = LeftDog + "px"
         dog.style.top = TopDog + "px"
+
+        
         
        
     }
 
+    function validar(){
+      const nome = document.getElementById("nome")
+      const senha = document.getElementById("senha")
+      
+      if(nome.value == "" || senha.value == "" ){
+        alert("dados não cadastrados")
+      }
+    }
+    
+    document.getElementById("button").addEventListener("click", validar)
     imagens()
     centralizar()
 
    
 
     window.addEventListener('resize', ()=>{
+        validar()
         imagens();
-        centralizar()
+        centralizar();
     })
 
 
