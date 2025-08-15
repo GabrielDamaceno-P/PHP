@@ -1,175 +1,228 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>minha primeira pagina HTML</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>minha primeira pagina HTML</title>
 
-    <style>
-      html, body {
-       margin: 0;
-       padding: 0;
-       overflow: hidden;
-       background-color: #ccc;
-      }
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
 
-      #container-imagens {
-        position: fixed;
-        display: grid;
-        width: 100vw;
-        height: 100vh;
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        grid-template-rows: repeat(auto-fit, minmax(80px, 1fr));
-      }
-      #card {
-        position: fixed;
-        border-radius: 10px;
-        background-color: white;
-        padding: 20px;
-        width: 300px;
-        box-shadow:10px 10px 3px black ;
-        border: 2px solid black;
-        text-align: center;
-        animation-name: card;
-        animation-duration: 2s;
-      }
-      @keyframes card{
-        from {opacity: 0;}
-        to {opacity: 2;}
-      }   
+    #container-imagens {
+      position: fixed;
+      display: grid;
+      width: 100vw;
+      height: 100vh;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      grid-template-rows: repeat(auto-fit, minmax(80px, 1fr));
+      animation: flutuarosso 4s ease-in-out infinite;
+      background: linear-gradient(to bottom, #87CEFA, #b0e0e6);
+    }
+    @keyframes flutuarosso{
+      0% {transform: translateY(0) }
+      50%{transform: translateY(-8px) }
+      100%{transform: translateY(0) }
 
-      #dog{
-        position: fixed;
-        z-index: 3;
-        height: 200px;
-        animation-name: dog;
-        animation-duration: 2s;
-      }
-      @keyframes dog{
-        from {transform: translateY(-400PX)}
-      }
-      input:focus{
-        background-color: bisque;
-        width: 200px;
-        border: 2px solid black;
-        box-shadow: 0 0 5px black;
-      }
-      button:hover{
-        box-shadow: 10 10 15px black;
-        background-color: azure;
-        transform: scale(1.02);
+    }
 
+    #card {
+      position: fixed;
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      background-color: white;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 8px 20px black;
+      border: 2px solid black;
+      text-align: center;
+      animation-name: card;
+      animation-duration: 2s;
+    }
+    #card:hover{
+      transform: translateY(-3px);
+    }
+
+    @keyframes card {
+      from {
+        opacity: 0;
       }
 
-    
+      to {
+        opacity: 2;
+      }
+    }
 
-    </style></head>
+    #dog {
+      position: fixed;
+      z-index: 3;
+      height: 200px;
+      margin: 0;
+      padding: 0;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+      animation-name: dog;
+      animation: dog 2s ease-out forwards, flutuar 2s ease-in-out infinite 2s;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    @keyframes dog {
+      from {
+        transform: translateY(-400PX)
+      }
+    }
+
+    @keyframes flutuar {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    input:focus {
+      background-color: bisque;
+      width: 200px;
+      border: 2px solid black;
+      box-shadow: 0 0 5px black;
+    }
+
+    button:hover {
+      box-shadow: 10 10 15px black;
+      background-color: azure;
+      transform: scale(1.02);
+
+    }
+  </style>
+</head>
+
 <body>
 
-   <div id="container-imagens"></div>
+  <div id="container-imagens"></div>
 
-   <img  id="dog" src="/imagens/dog.png" alt="dog" width="300px" height="300px" >
+  <img id="dog" src="/imagens/dog_aberto (1) (1).png" alt="dog" width="300px" height="300px">
 
-   <div id="card">
-     Nome: <input id="nome" type="text" placeholder="nome">
-     <br>
-     <br>
-     Senha: <input id="senha" type="password" placeholder="senha">
-     <br>
-     <br>
-     <button id="button">enviar</button>
-     <br>
-     Não tem conta? Entre e se <a href="#" >cadastre</a>
-   </div>
+  <div id="card">
+    Nome: <input id="nome" type="text" placeholder="nome">
+    <br>
+    <br>
+    Senha: <input id="senha" type="password" placeholder="senha">
+    <br>
+    <br>
+    <button id="button">enviar</button>
+    <br>
+    Não tem conta? Entre e se <a href="#">cadastre</a>
+  </div>
 
-   
+
 
 </body>
 
-   <script>
+<script>
+  const larguraTela = window.innerWidth
+  const alturaTela = window.innerHeight
+
+  const larguraImagem = 80
+  const alturaImagem = 80
+
+  function imagens() {
+
+    const colunas = Math.ceil(larguraTela / larguraImagem)
+    const linhas = Math.ceil(alturaTela / alturaImagem)
+
+
+    const totalImagens = colunas * linhas
+
+    const container = document.getElementById("container-imagens")
+
+    for (let i = 0; i < totalImagens; i++) {
+      const imagem = document.createElement("img")
+
+      imagem.src ="imagens/osso.png"
+      imagem.width = larguraImagem
+      imagem.height = alturaImagem
+      const delay = Math.random() * 4
+      imagem.style.opacity = 0.4
+      imagem.style.animation = `flutuarosso 4s ease-in-out infinite ${delay}s`
+
+      container.appendChild(imagem)
+    }
+  }
+
+  function centralizar() {
+    //Centralizar o Card e a Imagem do Dog
     const larguraTela = window.innerWidth
-    const  alturaTela = window.innerHeight
+    const alturaTela = window.innerHeight
 
-    const larguraImagem = 80
-    const alturaImagem = 80
+    const card = document.getElementById("card")
 
-    function imagens(){
+    const LarguraCard = card.offsetWidth
+    const AlturaCard = card.offsetHeight
 
-        const colunas = Math.ceil(larguraTela/larguraImagem)
-        const linhas = Math.ceil(alturaTela/alturaImagem)
-    
-    
-        const totalImagens = colunas * linhas
-    
-        const container = document.getElementById("container-imagens")
-    
-        for(let i = 0; i < totalImagens; i++){
-            const imagem = document.createElement("img")
-    
-            imagem.src = "/imagens/osso (2).png"
-            imagem.width = larguraImagem
-            imagem.height = alturaImagem
-    
-            container.appendChild(imagem)
-        }
-    }
+    const leftCard = (larguraTela - LarguraCard) / 2
+    const topCard = (alturaTela - AlturaCard) / 2
 
-    function centralizar(){
-        //Centralizar o Card e a Imagem do Dog
-        const larguraTela = window.innerWidth
-        const alturaTela = window.innerHeight
+    card.style.left = leftCard + "px"
+    card.style.top = topCard + "px"
 
-        const card = document.getElementById("card")
+    const dog = document.getElementById("dog")
 
-        const LarguraCard = card.offsetWidth
-        const AlturaCard = card.offsetHeight
+    const AlturaDog = dog.offsetHeight
+    const LarguraDog = dog.offsetWidth
 
-        const leftCard = (larguraTela - LarguraCard)/2
-        const topCard = (alturaTela - AlturaCard)/2
+    const LeftDog = (larguraTela - LarguraDog) / 2
+    const TopDog = topCard - AlturaDog
 
-        card.style.left = leftCard + "px"
-        card.style.top = topCard + "px"
+    dog.style.left = LeftDog + "px"
+    dog.style.top = TopDog + "px"
 
-        const dog = document.getElementById("dog")
 
-        const AlturaDog = dog.offsetHeight
-        const LarguraDog = dog.offsetWidth
 
-        const LeftDog = (larguraTela - LarguraDog)/2
-        const TopDog = topCard - AlturaDog
-
-        dog.style.left = LeftDog + "px"
-        dog.style.top = TopDog + "px"
-
-        
-        
-       
-    }
-
-    function validar(){
-      const nome = document.getElementById("nome")
-      const senha = document.getElementById("senha")
-      
-      if(nome.value == "" || senha.value == "" ){
-        alert("dados não cadastrados")
+   }
+function trocar(){
+    const aberto = "/imagens/dog_aberto (1) (1).png"
+    const fechado = "/imagens/dog_fechado (2).png"
+      if(dog.src.includes("aberto")){
+       dog.style.opacity = 0
+       setTimeout(()=>{dog.src=fechado;dog.style.opacity = 1}, 250)
+      }else{
+        dog.style.opacity = 0
+        setTimeout(()=>{dog.src=aberto;dog.style.opacity = 1}, 250)
       }
     }
-    
-    document.getElementById("button").addEventListener("click", validar)
-    imagens()
-    centralizar()
+    setInterval(trocar,2000)
 
-   
+  function validar() {
+    const nome = document.getElementById("nome")
+    const senha = document.getElementById("senha")
 
-    window.addEventListener('resize', ()=>{
-        validar()
-        imagens();
-        centralizar();
-    })
+    if (nome.value == "" || senha.value == "") {
+      alert("dados não inseridos")
+    } else {
+      alert("acesso liberado")
+    }
+  }
 
+  document.getElementById("button").addEventListener("click", validar)
+  imagens()
+  centralizar()
 
+   window.addEventListener('resize', () => {
+    validar()
+    imagens();
+    centralizar();
+  })
 
+</script>
 
-    
-    </script>
 </html>
